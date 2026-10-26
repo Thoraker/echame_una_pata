@@ -2,82 +2,54 @@
 
 import Button from "@/ui/button";
 import Link from "next/link";
+import { navLinks } from "@/lib/links";
 
 export default function Navbar() {
   return (
-    <div className="navbar sticky top-0 bg-base-100 shadow-sm">
+    <nav className="min-w-7xl flex sticky top-0 z-50 bg-white">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle lg:hidden"
+          >
             <svg
-              aria-label="Menu"
+              className="swap-off fill-current"
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              width="32"
+              height="32"
+              viewBox="0 0 512 512"
             >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
             </svg>
           </div>
           <ul
             tabIndex={-1}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <Link href="/dashboard" className="justify-between">
-                Ingreso
-              </Link>
-            </li>
-            <li>
-              <Link href="/lost-found" className="justify-between">
-                Extravíos
-              </Link>
-            </li>
-            <li>
-              <Link href="/adoption" className="justify-between">
-                Adopción
-              </Link>
-            </li>
-            <li>
-              <Link href="/about-us" className="justify-between">
-                Nosotros
-              </Link>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-blue-600">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <Link href="/" className="btn btn-ghost text-xl">
-          Encuentra mi Mascota
+          Milito
         </Link>
       </div>
       <div className="navbar-start hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link href="/dashboard" className="justify-between">
-              Ingreso
-            </Link>
-          </li>
-          <li>
-            <Link href="/lost-found" className="justify-between">
-              Extravíos
-            </Link>
-          </li>
-          <li>
-            <Link href="/adoption" className="justify-between">
-              Adopción
-            </Link>
-          </li>
-          <li>
-            <Link href="/about-us" className="justify-between">
-              Nosotros
-            </Link>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} className="hover:text-blue-600">
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -98,6 +70,6 @@ export default function Navbar() {
         </svg>
         Voluntario
       </Button>
-    </div>
+    </nav>
   );
 }
